@@ -1,0 +1,113 @@
+[user]
+	name = Benjamin Modayil
+	email = modayilme@gmail.com
+
+[alias]
+	co = checkout
+	uncommit = reset HEAD^
+	recent = "for-each-ref --sort=-committerdate refs/heads refs/remotes --format='%(authordate:short) %(color:red)%(objectname:short) %(color:yellow)%(refname:short)%(color:reset) (%(color:green)%(committerdate:relative)%(color:reset)) %(authorname)'"
+	resetBranch = "!f() { \
+		current_branch=$(git symbolic-ref --short HEAD); \
+		base_branch=$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@'); \
+		git checkout $base_branch; \
+		git pull origin $base_branch; \
+		git branch -D $current_branch; \
+		git pull; \
+		git checkout $current_branch; \
+	}; f"
+	scb = branch --show-current
+	ccb = ! git scb | tr -d '\n' | pbcopy
+	findlogs = !git diff HEAD | grep -n '^+.*console\\.log' -B 1
+	findtodos = !git diff HEAD | grep -n -i '^+.*TODO:' -B 1
+	stage-commit-push = "!f() { \
+		force_flag=''; \
+		commit_msg=''; \
+		no_verify=''; \
+		for arg in \"$@\"; do \
+				if [ \"$arg\" = \"-f\" ]; then \
+						force_flag='-f'; \
+				elif [ \"$arg\" = \"--no-verify\" ]; then \
+						no_verify='--no-verify'; \
+				else \
+						commit_msg=\"$arg\"; \
+				fi; \
+		done; \
+		if [ ! -z \"$no_verify\" ] || ([ -z \"$(git findlogs)\" ] && [ -z \"$(git findtodos)\" ]); then \
+				git add -A && \
+				git commit -m \"$commit_msg\" $no_verify && \
+				git push origin $(git symbolic-ref --short HEAD) $force_flag; \
+		else \
+				if [ ! -z \"$(git findlogs)\" ]; then \
+						echo \"console.log(s) found in:\"; \
+						git findlogs; \
+						echo \"\nAborting.\"; \
+				fi; \
+				if [ ! -z \"$(git findtodos)\" ]; then \
+						echo \"TODO(s) found in:\"; \
+						git findtodos; \
+						echo \"\nAborting.\"; \
+				fi; \
+		fi; \
+	}; f"
+	temp = "!f() { \
+		git add -A && \
+		git commit -m \"TEMP\" --no-verify; \
+	}; f"
+
+	# List aliases.
+	aliases = config --get-regexp alias
+	# Remove branches that have already been merged with main.
+		# a.k.a. ‘delete merged’
+	dm = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
+	open = "!f() { \
+		remote=$(git remote -v | grep '(push)' | awk '{print $2}'); \
+		repo_path=$(echo $remote | sed -E 's|^git@github.com:|https://github.com/|' | sed 's/.git$//'); \
+		branch=$(git branch --show-current); \
+		open $repo_path/tree/$branch; \
+	}; f"
+
+[core]
+	# Use custom `.gitignore` and `.gitattributes`.
+	excludesFile = ~/.dfignore
+	attributesfile = ~/.gitattributes
+
+[color "branch"]
+	current = yellow reverse
+	local = yellow
+	remote = green
+
+[color "diff"]
+	meta = yellow bold
+	frag = magenta bold # line info
+	old = red # deletions
+	new = green # additions
+
+[color "status"]
+	added = yellow
+	changed = green
+	untracked = cyan
+
+[diff]
+	# Detect copies as well as renames.
+	renames = copies
+
+[diff "bin"]
+	# Use `hexdump` to diff binary files.
+	textconv = hexdump -v -C
+
+[help]
+	# Automatically correct and execute mistyped commands.
+	autocorrect = 1
+
+[merge]
+	# Include summaries of merged commits in newly created merge commit messages
+	log = true
+
+[init]
+	defaultBranch = main
+
+[branch]
+	sort = -committerdate
+[push]
+	default = current
+	autoSetupRemote = true
