@@ -1,0 +1,11 @@
+# Ignore everything
+*
+
+# Include only dot files/folders
+!.gitconfig*
+!.dfignore*
+!.macos*
+!.aliases*
+!.zshrc*
+!.gitignore*
+# Add other dotfiles you want to track
