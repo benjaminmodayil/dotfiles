@@ -1,11 +1,48 @@
-# Ignore everything
-*
+# Compiled Python files
+*.pyc
 
-# Include only dot files/folders
-!.gitconfig*
-!.dfignore*
-!.macos*
-!.aliases*
-!.zshrc*
-!.gitignore*
-# Add other dotfiles you want to track
+# Folder view configuration files
+.DS_Store
+Desktop.ini
+
+# Thumbnail cache files
+._*
+Thumbs.db
+
+# Files that might appear on external disks
+.Spotlight-V100
+.Trashes
+
+# Dependencies
+node_modules/
+
+# Build outputs
+.next/
+coverage/
+
+# Environment (but keep samples)
+.env
+.env.local
+!.env.sample
+!.env.*.sample
+
+# IDE/Editor
+.vscode/
+.idea/
+*.swp
+.DS_Store
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Testing
+coverage/
+.nyc_output/
+
+# Misc
+.cache/
+.temp/
+
+.cursorrules
