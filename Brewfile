@@ -1,11 +1,13 @@
 tap "homebrew/bundle"
 tap "homebrew/services"
+
 brew "curl"
 brew "ffmpeg"
 brew "gh"
 brew "httpie"
-brew "youtube-dl"
+brew "yt-dlp"
 brew "docker"
+brew "mas"
 
 cask "karabiner-elements"
 cask "cursor"
@@ -29,3 +31,14 @@ cask "steam"
 cask "typora"
 cask "uhk-agent"
 cask "warp"
+cask "bartender"
+cask "betterdisplay"
+cask "daisydisk"
+cask "hakuneko"
+cask "kindle-comic-converter"
+cask "prusaslicer"
+cask "sip"
+cask "xtool-creative-space"
+
+# davinci resolve
+mas "davinci resolve", id: 571213070
