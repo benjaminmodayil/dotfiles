@@ -8,7 +8,9 @@ alias .....="cd ../../../.."
 alias ~="cd ~" # `cd` is probably faster to type though
 alias -- -="cd -"
 
+
 # Shortcuts
+alias initialize="source ~/.zshrc"
 alias p="cd ~/documents/sites.nosync"
 alias g="git"
 
@@ -52,8 +54,8 @@ alias hide="defaults write com.apple.finder AppleShowAllFiles -bool false && kil
 alias hidedesktop="defaults write com.apple.finder CreateDesktop -bool false && killall Finder"
 alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && killall Finder"
 
-for method in get head post put delete trace options; do
-    alias "${method}"="http -v ${method}"
+for method in GET HEAD POST PUT DELETE TRACE OPTIONS; do
+    alias "${method}"="http --print=hb ${method}"
 done
 
 # Lock the screen (when going AFK)
