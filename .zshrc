@@ -42,6 +42,11 @@ for config in "$HOME"/.zshrc.*; do
     fi
 done
 
+# Do not add .gitconfig, or .gitignore! Auto-sourced in ~/ if you run the install.sh script
+for file in ~/.dotfiles/.{aliases,macos}; do
+    [ -r "$file" ] && source "$file"
+done
+
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
 echo "Done loading .zshrc configuration!"
