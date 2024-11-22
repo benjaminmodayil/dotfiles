@@ -29,6 +29,7 @@ function check_tool() {
 
 # Check if tool exists before prompting configuration
 check_tool "brew" 'curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh | bash; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zshrc; source ~/.zshrc'
+check_tool "npm" "brew install node"
 check_tool "nvm" "curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash"
 check_tool "avn" "npm install -g avn avn-nvm avn-n && avn setup"
 check_tool "bun" "curl -fsSL https://bun.sh/install | bash"
@@ -43,7 +44,7 @@ for config in "$HOME"/.zshrc.*; do
 done
 
 # Do not add .gitconfig, or .gitignore! Auto-sourced in ~/ if you run the install.sh script
-for file in ~/.dotfiles/.{aliases,macos}; do
+for file in ~/.dotfiles/.{aliases}; do
     [ -r "$file" ] && source "$file"
 done
 

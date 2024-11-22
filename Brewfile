@@ -8,6 +8,10 @@ brew "httpie"
 brew "yt-dlp"
 brew "docker"
 brew "mas"
+brew "node"
+# brew "nvm"
+# AVN does not exist on brew.sh
+# brew "avn"
 
 cask "karabiner-elements"
 cask "cursor"
