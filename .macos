@@ -1,0 +1,237 @@
+#!/usr/bin/env bash
+
+# Close System Preferences to prevent interference
+osascript -e 'tell application "System Preferences" to quit'
+
+# Ask for the administrator password upfront
+sudo -v
+
+# Keep-alive: update existing `sudo` time stamp until script has finished
+while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+
+###############################################################################
+# General UI/UX                                                               #
+###############################################################################
+
+# Reset audio volume at startup
+sudo nvram -d SystemAudioVolume
+
+# Reset transparency settings
+defaults delete com.apple.universalaccess reduceTransparency
+
+# Reset highlight color
+defaults delete NSGlobalDomain AppleHighlightColor
+
+# Reset sidebar icon size
+defaults delete NSGlobalDomain NSTableViewDefaultSizeMode
+
+# Reset scrollbar behavior
+defaults delete NSGlobalDomain AppleShowScrollBars
+
+# Reset focus ring animation
+defaults delete NSGlobalDomain NSUseAnimatedFocusRing
+
+# Reset toolbar title delay
+defaults delete NSGlobalDomain NSToolbarTitleViewRolloverDelay
+
+# Reset window resize speed
+defaults delete NSGlobalDomain NSWindowResizeTime
+
+# Reset save panel state
+defaults delete NSGlobalDomain NSNavPanelExpandedStateForSaveMode
+defaults delete NSGlobalDomain NSNavPanelExpandedStateForSaveMode2
+
+# Reset print panel state
+defaults delete NSGlobalDomain PMPrintingExpandedStateForPrint
+defaults delete NSGlobalDomain PMPrintingExpandedStateForPrint2
+
+# Reset document save location
+defaults delete NSGlobalDomain NSDocumentSaveNewDocumentsToCloud
+
+# Reset printer app behavior
+defaults delete com.apple.print.PrintingPrefs "Quit When Finished"
+
+# Reset app opening warnings
+defaults delete com.apple.LaunchServices LSQuarantine
+
+# Reset ASCII control character display
+defaults delete NSGlobalDomain NSTextShowsControlCharacters
+
+# Reset system-wide resume feature
+defaults delete com.apple.systempreferences NSQuitAlwaysKeepsWindows
+
+# Reset automatic app termination
+defaults delete NSGlobalDomain NSDisableAutomaticTermination
+
+# Reset Help Viewer mode
+defaults delete com.apple.helpviewer DevMode
+
+# Reset login window info
+sudo defaults delete /Library/Preferences/com.apple.loginwindow AdminHostInfo
+
+# Reset text behavior
+defaults delete NSGlobalDomain NSAutomaticCapitalizationEnabled
+defaults delete NSGlobalDomain NSAutomaticDashSubstitutionEnabled
+defaults delete NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled
+defaults delete NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled
+
+###############################################################################
+# Trackpad, mouse, keyboard, Bluetooth accessories, and input                 #
+###############################################################################
+
+# Reset Bluetooth audio quality
+defaults delete com.apple.BluetoothAudioAgent "Apple Bitpool Min (editable)"
+
+# Reset keyboard access
+defaults delete NSGlobalDomain AppleKeyboardUIMode
+
+# Reset zoom controls
+defaults delete com.apple.universalaccess closeViewScrollWheelToggle
+defaults delete com.apple.universalaccess HIDScrollZoomModifierMask
+defaults delete com.apple.universalaccess closeViewZoomFollowsFocus
+
+# Reset font rendering
+defaults delete NSGlobalDomain AppleFontSmoothing
+
+# Reset display resolution settings
+sudo defaults delete /Library/Preferences/com.apple.windowserver DisplayResolutionEnabled
+
+###############################################################################
+# Finder                                                                      #
+###############################################################################
+
+# Reset Finder quit option
+defaults delete com.apple.finder QuitMenuItem
+
+# Reset Finder animations
+defaults delete com.apple.finder DisableAllAnimations
+
+# Reset new window target
+defaults delete com.apple.finder NewWindowTarget
+defaults delete com.apple.finder NewWindowTargetPath
+
+# Reset desktop icon visibility
+defaults delete com.apple.finder ShowExternalHardDrivesOnDesktop
+defaults delete com.apple.finder ShowHardDrivesOnDesktop
+defaults delete com.apple.finder ShowMountedServersOnDesktop
+defaults delete com.apple.finder ShowRemovableMediaOnDesktop
+
+# Reset hidden files visibility
+defaults delete com.apple.finder AppleShowAllFiles
+
+# Reset filename extensions
+defaults delete NSGlobalDomain AppleShowAllExtensions
+
+# Reset Finder view options
+defaults delete com.apple.finder ShowStatusBar
+defaults delete com.apple.finder ShowPathbar
+defaults delete com.apple.finder _FXShowPosixPathInTitle
+defaults delete com.apple.finder _FXSortFoldersFirst
+defaults delete com.apple.finder FXDefaultSearchScope
+defaults delete com.apple.finder FXEnableExtensionChangeWarning
+
+# Reset spring loading
+defaults delete NSGlobalDomain com.apple.springing.enabled
+defaults delete NSGlobalDomain com.apple.springing.delay
+
+# Reset .DS_Store behavior
+defaults delete com.apple.desktopservices DSDontWriteNetworkStores
+defaults delete com.apple.desktopservices DSDontWriteUSBStores
+
+# Reset disk image mounting
+defaults delete com.apple.frameworks.diskimages auto-open-ro-root
+defaults delete com.apple.frameworks.diskimages auto-open-rw-root
+defaults delete com.apple.finder OpenWindowForNewRemovableDisk
+
+# Reset view settings
+/usr/libexec/PlistBuddy -c "Delete :DesktopViewSettings:IconViewSettings:showItemInfo" ~/Library/Preferences/com.apple.finder.plist 2>/dev/null
+/usr/libexec/PlistBuddy -c "Delete :FK_StandardViewSettings:IconViewSettings:showItemInfo" ~/Library/Preferences/com.apple.finder.plist 2>/dev/null
+/usr/libexec/PlistBuddy -c "Delete :StandardViewSettings:IconViewSettings:showItemInfo" ~/Library/Preferences/com.apple.finder.plist 2>/dev/null
+
+# Reset preferred view style
+defaults delete com.apple.finder FXPreferredViewStyle
+
+# Reset trash warning
+defaults delete com.apple.finder WarnOnEmptyTrash
+
+# Reset AirDrop visibility
+defaults delete com.apple.NetworkBrowser BrowseAllInterfaces
+
+# Reset Library visibility
+chflags hidden ~/Library
+
+# Reset Finder info panes
+defaults delete com.apple.finder FXInfoPanesExpanded
+
+###############################################################################
+# Dock                                                                        #
+###############################################################################
+
+# Reset Dock settings
+defaults delete com.apple.dock mouse-over-hilite-stack
+defaults delete com.apple.dock mineffect
+defaults delete com.apple.dock minimize-to-application
+defaults delete com.apple.dock enable-spring-load-actions-on-all-items
+defaults delete com.apple.dock show-process-indicators
+defaults delete com.apple.dock launchanim
+defaults delete com.apple.dock expose-animation-duration
+defaults delete com.apple.dock expose-group-by-app
+defaults delete com.apple.dock dashboard-in-overlay
+defaults delete com.apple.dock mru-spaces
+defaults delete com.apple.dock autohide-delay
+defaults delete com.apple.dock autohide-time-modifier
+defaults delete com.apple.dock autohide
+defaults delete com.apple.dock showhidden
+defaults delete com.apple.dock show-recents
+
+# Reset hot corners
+defaults delete com.apple.dock wvous-br-corner
+defaults delete com.apple.dock wvous-br-modifier
+
+###############################################################################
+# Activity Monitor                                                            #
+###############################################################################
+
+defaults delete com.apple.ActivityMonitor OpenMainWindow
+defaults delete com.apple.ActivityMonitor IconType
+defaults delete com.apple.ActivityMonitor ShowCategory
+defaults delete com.apple.ActivityMonitor SortColumn
+defaults delete com.apple.ActivityMonitor SortDirection
+
+###############################################################################
+# App Store                                                                   #
+###############################################################################
+
+defaults delete com.apple.appstore WebKitDeveloperExtras
+defaults delete com.apple.appstore ShowDebugMenu
+defaults delete com.apple.SoftwareUpdate AutomaticCheckEnabled
+defaults delete com.apple.SoftwareUpdate ScheduleFrequency
+defaults delete com.apple.SoftwareUpdate AutomaticDownload
+defaults delete com.apple.SoftwareUpdate CriticalUpdateInstall
+defaults delete com.apple.SoftwareUpdate ConfigDataInstall
+defaults delete com.apple.commerce AutoUpdate
+defaults delete com.apple.commerce AutoUpdateRestartRequired
+
+###############################################################################
+# Photos                                                                      #
+###############################################################################
+
+defaults -currentHost delete com.apple.ImageCapture disableHotPlug
+
+###############################################################################
+# Google Chrome                                                               #
+###############################################################################
+
+defaults delete com.google.Chrome AppleEnableSwipeNavigateWithScrolls
+defaults delete com.google.Chrome AppleEnableMouseSwipeNavigateWithScrolls
+defaults delete com.google.Chrome DisablePrintPreview
+defaults delete com.google.Chrome PMPrintingExpandedStateForPrint2
+
+# Kill affected applications
+for app in "Activity Monitor" "Address Book" "Calendar" "Contacts" "cfprefsd" \
+    "Dock" "Finder" "Mail" "Messages" "Photos" "Safari" "SystemUIServer" \
+    "Terminal" "iCal"; do
+    killall "${app}" &> /dev/null
+done
+
+echo "Done. Note that some of these changes require a logout/restart to take effect."

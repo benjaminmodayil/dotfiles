@@ -37,6 +37,7 @@ check_tool "http" "brew install httpie"
 
 
 # Source additional configurations; ex: `.zshrc.work`
+setopt NULL_GLOB  # Prevents error when no matches are found
 if ls "$HOME"/.zshrc.* 1> /dev/null 2>&1; then
     for config in "$HOME"/.zshrc.*; do
         if [ -f "$config" ] && [ "$config" != "$HOME/.zshrc.swp" ]; then
@@ -44,6 +45,7 @@ if ls "$HOME"/.zshrc.* 1> /dev/null 2>&1; then
         fi
     done
 fi
+unsetopt NULL_GLOB  # Reset to default behavior
 
 # Do not add .gitconfig, or .gitignore! Auto-sourced in ~/ if you run the install.sh script
 for file in ~/.dotfiles/.{aliases}; do
