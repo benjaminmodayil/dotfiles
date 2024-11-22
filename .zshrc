@@ -37,11 +37,13 @@ check_tool "http" "brew install httpie"
 
 
 # Source additional configurations; ex: `.zshrc.work`
-for config in "$HOME"/.zshrc.*; do
-    if [ -f "$config" ] && [ "$config" != "$HOME/.zshrc.swp" ]; then
-        source "$config"
-    fi
-done
+if ls "$HOME"/.zshrc.* 1> /dev/null 2>&1; then
+    for config in "$HOME"/.zshrc.*; do
+        if [ -f "$config" ] && [ "$config" != "$HOME/.zshrc.swp" ]; then
+            source "$config"
+        fi
+    done
+fi
 
 # Do not add .gitconfig, or .gitignore! Auto-sourced in ~/ if you run the install.sh script
 for file in ~/.dotfiles/.{aliases}; do
