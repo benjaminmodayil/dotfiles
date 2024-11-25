@@ -1,1 +1,25 @@
-# Add later
+# finder
+
+# Show all filename extensions
+defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+
+# Show status bar in Finder
+defaults write com.apple.finder ShowStatusBar -bool true
+
+# Show path bar in Finder
+defaults write com.apple.finder ShowPathbar -bool true
+
+# Show hidden files by default in Finder
+defaults write com.apple.finder AppleShowAllFiles -bool true
+
+# Show hidden files by default in Terminal
+defaults write com.apple.Terminal AppleShowAllFiles -bool true
+
+# Kill Finder to apply changes
+killall Finder
+
+# Set the default location for screenshots
+defaults write com.apple.screencapture location ~/Downloads
+
+# Kill SystemUIServer to apply changes for screenshot update
+killall SystemUIServer

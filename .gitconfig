@@ -68,7 +68,7 @@
 
 [core]
 	# Use custom `.gitignore` and `.gitattributes`.
-	# excludesFile = ~/.dfignore
+	excludesFile = ~/.gitignore
 	attributesfile = ~/.gitattributes
 
 [color "branch"]

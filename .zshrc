@@ -47,10 +47,7 @@ if ls "$HOME"/.zshrc.* 1> /dev/null 2>&1; then
 fi
 unsetopt NULL_GLOB  # Reset to default behavior
 
-# Do not add .gitconfig, or .gitignore! Auto-sourced in ~/ if you run the install.sh script
-for file in ~/.dotfiles/.{aliases}; do
-    [ -r "$file" ] && source "$file"
-done
+[ -r ~/.dotfiles/.aliases ] && source ~/.dotfiles/.aliases
 
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
