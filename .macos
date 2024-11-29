@@ -15,6 +15,9 @@ defaults write com.apple.finder AppleShowAllFiles -bool true
 # Show hidden files by default in Terminal
 defaults write com.apple.Terminal AppleShowAllFiles -bool true
 
+# Set the idle time for the screensaver to 30 minutes
+defaults write com.apple.screensaver idleTime -int 1800
+
 # Kill Finder to apply changes
 killall Finder
 
