@@ -1,5 +1,8 @@
 echo "Loading .zshrc configuration..."
 
+# Initialize Homebrew first (move this to the top)
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
 # NVM Configuration
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
@@ -48,7 +51,5 @@ fi
 unsetopt NULL_GLOB  # Reset to default behavior
 
 [ -r ~/.dotfiles/.aliases ] && source ~/.dotfiles/.aliases
-
-eval "$(/opt/homebrew/bin/brew shellenv)"
 
 echo "Done loading .zshrc configuration!"
