@@ -15,6 +15,7 @@
 		git pull; \
 		git checkout $current_branch; \
 	}; f"
+	resetfile = "!f() { git checkout $(git rev-parse --abbrev-ref --symbolic-full-name @{u}) -- $1; }; f"
 	scb = branch --show-current
 	ccb = ! git scb | tr -d '\n' | pbcopy
 	findlogs = !git diff HEAD | grep -n '^+.*console\\.log' -B 1
