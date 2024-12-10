@@ -15,7 +15,7 @@
 		git pull; \
 		git checkout $current_branch; \
 	}; f"
-	resetfile ="!f() { mainbranch=$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@'); git checkout origin/$mainbranch -- '$1'; }; f"
+	resetfile ="!f() { mainbranch=$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@'); git checkout origin/$mainbranch -- $1; }; f"
 	scb = branch --show-current
 	ccb = ! git scb | tr -d '\n' | pbcopy
 	findlogs = !git diff HEAD | grep -n '^+.*console\\.log' -B 1
