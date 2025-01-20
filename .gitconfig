@@ -20,6 +20,7 @@
 	ccb = ! git scb | tr -d '\n' | pbcopy
 	findlogs = !git diff HEAD | grep -n '^+.*console\\.log' -B 1
 	findtodos = !git diff HEAD | grep -n -i '^+.*TODO:' -B 1
+	scpai = "!f() { ~/.dotfiles/scripts/git-diff-openai.sh \"$@\"; }; f"
 	stage-commit-push = "!f() { \
 		force_flag=''; \
 		commit_msg=''; \
@@ -58,7 +59,7 @@
 	# List aliases.
 	aliases = config --get-regexp alias
 	# Remove branches that have already been merged with main.
-		# a.k.a. ‘delete merged’
+		# a.k.a. 'delete merged'
 	dm = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
 	open = "!f() { \
 		remote=$(git remote -v | grep '(push)' | awk '{print $2}'); \

@@ -3,6 +3,8 @@ echo "Loading .zshrc configuration..."
 # Initialize Homebrew first (move this to the top)
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
+export PATH="$HOME/.local/bin:$PATH"
+
 # NVM Configuration
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
