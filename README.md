@@ -39,11 +39,18 @@ Credit: [@mathiasbynens](https://github.com/mathiasbynens/dotfiles) for the init
 Generate AI-powered commit messages using OpenAI:
 
 ```bash
-# Stage your changes and generate a review commit messag
+# Stage your changes and generate a review commit message
 git scpai
-```
 
-`-m` for manual commit message
+# Use manual commit message
+git scpai -m "your commit message"
+
+# Commit without pushing to remote
+git scpai --no-push
+
+# Manual message without pushing
+git scpai -m "your commit message" --no-push
+```
 
 ### Custom Git Aliases
 

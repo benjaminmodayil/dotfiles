@@ -3,11 +3,16 @@
 
 # Parse arguments
 MANUAL_MSG=""
+NO_PUSH=false
 while [[ $# -gt 0 ]]; do
     case $1 in
         -m|--message)
             MANUAL_MSG="$2"
             shift
+            shift
+            ;;
+        --no-push)
+            NO_PUSH=true
             shift
             ;;
         *)
@@ -174,13 +179,18 @@ if [ ! -z "$MANUAL_MSG" ]; then
     # Commit and push manual message
     if git commit -m "$MANUAL_MSG"; then
         echo "Changes committed successfully"
-        echo "Pushing to remote..."
-        if git push origin $(git symbolic-ref --short HEAD); then
-            echo "Changes pushed successfully"
-            exit 0
+        if [ "$NO_PUSH" = false ]; then
+            echo "Pushing to remote..."
+            if git push origin $(git symbolic-ref --short HEAD); then
+                echo "Changes pushed successfully"
+                exit 0
+            else
+                echo "Error: Failed to push changes"
+                exit 1
+            fi
         else
-            echo "Error: Failed to push changes"
-            exit 1
+            echo "Changes not pushed (--no-push flag used)"
+            exit 0
         fi
     else
         echo "Error: Failed to commit changes"
@@ -205,13 +215,18 @@ else
             # Commit and push
             if git commit -m "$COMMIT_MSG"; then
                 echo "Changes committed successfully"
-                echo "Pushing to remote..."
-                if git push origin $(git symbolic-ref --short HEAD); then
-                    echo "Changes pushed successfully"
-                    exit 0
+                if [ "$NO_PUSH" = false ]; then
+                    echo "Pushing to remote..."
+                    if git push origin $(git symbolic-ref --short HEAD); then
+                        echo "Changes pushed successfully"
+                        exit 0
+                    else
+                        echo "Error: Failed to push changes"
+                        exit 1
+                    fi
                 else
-                    echo "Error: Failed to push changes"
-                    exit 1
+                    echo "Changes not pushed (--no-push flag used)"
+                    exit 0
                 fi
             else
                 echo "Error: Failed to commit changes"
