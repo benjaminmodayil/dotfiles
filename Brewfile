@@ -49,6 +49,7 @@ cask "kindle-comic-converter"
 cask "prusaslicer"
 cask "sip"
 cask "xtool-creative-space"
+cask "mouseless"
 
 # Mac App Store Downloads. To find an app use `mas search 'app name'`
 mas "davinci resolve", id: 571213070
