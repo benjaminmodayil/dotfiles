@@ -52,3 +52,4 @@ cask "xtool-creative-space"
 
 # davinci resolve
 mas "davinci resolve", id: 571213070
+mas "One Thing", id: 1604176982
