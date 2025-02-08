@@ -17,6 +17,7 @@ brew "gettext"
 # brew "avn"
 
 cask "karabiner-elements"
+cask "claude"
 cask "cursor"
 cask "1password"
 cask "affinity-designer"
