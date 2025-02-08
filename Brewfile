@@ -50,6 +50,6 @@ cask "prusaslicer"
 cask "sip"
 cask "xtool-creative-space"
 
-# davinci resolve
+# Mac App Store Downloads. To find an app use `mas search 'app name'`
 mas "davinci resolve", id: 571213070
 mas "One Thing", id: 1604176982
