@@ -12,6 +12,7 @@ brew "mas"
 brew "node"
 brew "jq"
 brew "gettext"
+brew "1password-cli"
 # brew "nvm"
 # AVN does not exist on brew.sh
 # brew "avn"
